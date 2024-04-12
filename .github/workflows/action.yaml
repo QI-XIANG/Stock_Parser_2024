@@ -2,7 +2,7 @@ name: run stock_parser.py
 
 on:
   schedule:
-    - cron: '0 */8 * * *' # Run Every 8 hours
+    - cron: '0 */4 * * *' # Run Every 4 hours
 
 jobs:
   build:
