@@ -7,6 +7,10 @@ import pytz
 tw = pytz.timezone('Asia/Taipei')
 
 # 指定要抓取的網頁URL
+import requests as req
+from bs4 import BeautifulSoup
+
+# 指定要抓取的網頁URL
 def stock_parser(stock_code):
     url = "https://tw.stock.yahoo.com/quote/"+stock_code+".TW"
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
@@ -22,6 +26,16 @@ def stock_parser(stock_code):
     stock_overview.append(stock_title)
     for x in stock_detail:
         stock_overview.append(x.find_all('span')[1].text)
+    
+    if(stock_overview[7]>stock_overview[1]):
+        stock_overview[0] = soup.find_all('h1', class_="C($c-link-text)")[0].text + "(" + stock_code + ")" + " (跌)"
+    elif(stock_overview[7]<stock_overview[1]):
+        stock_overview[0] = soup.find_all('h1', class_="C($c-link-text)")[0].text + "(" + stock_code + ")" + " (漲)"
+    else:
+        stock_overview[0] = soup.find_all('h1', class_="C($c-link-text)")[0].text + "(" + stock_code + ")" + " (平盤)"
+
+    #print(stock_overview)
+    
     return stock_overview
 
 column_names = ["名稱", "成交", "開盤", "最高", "最低", "均價", "成交金額(億)", "昨收", "漲跌幅", "漲跌", "總量", "昨量", "振幅"]
