@@ -39,7 +39,7 @@ def stock_parser(stock_code):
     return stock_overview
 
 column_names = ["名稱", "成交", "開盤", "最高", "最低", "均價", "成交金額(億)", "昨收", "漲跌幅", "漲跌", "總量", "昨量", "振幅"]
-stock_codes = ["%5ETWII", "5880", "00679B", "00713", "00907"]
+stock_codes = ["%5ETWII", "5880", "00679B", "00713", "00733", "00907"]
 
 stock_datas = []
 for stock_code in stock_codes:
